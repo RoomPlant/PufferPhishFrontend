@@ -1,0 +1,37 @@
+.header {
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(to left, #b44a88, #7249b3);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+
+.cell {
+    transition-duration: 150ms;
+    color: white;
+    font-size: 28px;
+    font-family: 'Raleway' sans-serif;
+    text-align: center;
+    width: calc(85%/6);
+    word-wrap: normal;
+    border-radius: 15px 15px 0px 0px;
+    padding: 20px 0px;
+    box-sizing: border-box;
+}
+
+.cell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active {
+    transition-duration: 150ms;
+    background-color: white;
+    color: #994a99;
+    box-shadow: 0px -5px 5px #50265077;
+}
+
+.active:hover {
+    background-color: white;
+}
