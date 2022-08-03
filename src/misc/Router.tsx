@@ -9,7 +9,7 @@ export let Router = () => {
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/index" element={<MainPage/>}>
                 
-            </Route>
+            </Route>    
         </Routes>
         )
 }

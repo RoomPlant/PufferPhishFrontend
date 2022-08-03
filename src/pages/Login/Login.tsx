@@ -13,7 +13,7 @@ const [passwd, setPasswd] = useState('');
 const onClick = async () => {
     axios({
         method: 'post',
-        url: 'http://localhost:3030/pidor',
+        url: 'http://localhost:3030/mail',
         data: {
             "login": email,
             "passwd": passwd
