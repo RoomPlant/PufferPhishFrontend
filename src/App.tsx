@@ -4,7 +4,7 @@ import { Router } from "./misc/Router";
 const App = () => {
   return (
     <div className="App">
-      <Router />
+      <Router/>
     </div>
   );
 }
