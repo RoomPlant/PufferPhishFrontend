@@ -1,18 +1,21 @@
 import React from "react";
 import { useState } from "react";
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+
 import "./styles.css";
 import { Input } from "../input";
-import axios from "axios";
+import stateInterface from "../../misc/stateInterface";
+import { setAuthed } from "../../features/emails/emailsSlice";
 
-interface authProps {
-    setIsAuthed: Function,
-    isAdditional?: boolean
-}
 
-export const AuthForm = ({setIsAuthed, isAdditional}:authProps) => {
+
+export const AuthForm = () => {
     const [email, setEmail] = useState('');
     const [passwd, setPasswd] = useState('');
+    const isAdditional = useSelector((state:stateInterface) => state.emails.isAdditional);
+    const dispatch = useDispatch();
 
     const handleAuth = async () => {
         axios({
@@ -25,7 +28,7 @@ export const AuthForm = ({setIsAuthed, isAdditional}:authProps) => {
        })
             .then(resp => {
                 if (resp.data == "success") {
-                    setIsAuthed(true);
+                    dispatch(setAuthed());
                 }
         });
     }
@@ -39,7 +42,7 @@ export const AuthForm = ({setIsAuthed, isAdditional}:authProps) => {
                     <Input value={passwd} handleChange={setPasswd} type="password" labelStyle="label" inputStyle="input" label="Пароль"/>
                     <Button onClick={handleAuth} className="button">Добавить</Button>
                 </div>
-                {isAdditional && <div onClick={() => setIsAuthed(true)} className="closeIcon"/>}
+                {isAdditional && <div onClick={() => dispatch(setAuthed())} className="closeIcon"/>}
             </div> 
         </div>
     )
