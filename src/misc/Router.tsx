@@ -16,7 +16,6 @@ export let Router = () => {
                 <Route path="/index/socnet" element={<WIP/>}/>
                 <Route path="/index/message" element={<WIP/>}/>
                 <Route path="/index/calls" element={<WIP/>}/>
-                <Route path="/index/sites" element={<WIP/>}/>
                 <Route path="/index/wifi" element={<WIP/>}/>
             </Route>
         </Routes>

@@ -6,18 +6,19 @@ import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.css";
 import { Input } from "../input";
-import stateInterface from "../../misc/stateInterface";
-import { setAuthed } from "../../features/emails/emailsSlice";
+import { selectIsAdditional, setAuthed } from "../../features/emails/emailsSlice";
 
 
 
 export const AuthForm = () => {
     const [email, setEmail] = useState('');
     const [passwd, setPasswd] = useState('');
-    const isAdditional = useSelector((state:stateInterface) => state.emails.isAdditional);
+    const [isLoading, setIsLoading] = useState(true);
+    const isAdditional = useSelector(selectIsAdditional);
     const dispatch = useDispatch();
 
-    const handleAuth = async () => {
+    const handleAuth = () => {
+        setIsLoading(true);
         axios({
             method: 'post',
             url: 'http://localhost:3030/mailAuth',
@@ -25,16 +26,22 @@ export const AuthForm = () => {
                 "login": email,
                 "passwd": passwd
             }
-       })
-            .then(resp => {
-                if (resp.data == "success") {
-                    dispatch(setAuthed());
-                }
-        });
+       }).then(resp => {
+            setIsLoading(false);
+            if (resp.data == "success") {
+                dispatch(setAuthed());
+            }
+        })
     }
 
     return (
-        <div className="background">
+        <div className="background"> 
+            {
+                isLoading&&
+                <div className="loading">
+                    <div className="loadingSpinner"/>
+                </div>
+            }
             <div className="formBackground">
                 <div className="form">
                     <p className="heading">Добавление почты</p>
@@ -43,7 +50,7 @@ export const AuthForm = () => {
                     <Button onClick={handleAuth} className="button">Добавить</Button>
                 </div>
                 {isAdditional && <div onClick={() => dispatch(setAuthed())} className="closeIcon"/>}
-            </div> 
+            </div>
         </div>
     )
 }

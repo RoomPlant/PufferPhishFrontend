@@ -1,10 +1,10 @@
 .background {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: calc(100vh - 100px);
-    backdrop-filter: blur(5px);
 }
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;600;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Raleway:wght@100&display=swap');
@@ -12,6 +12,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
 
 .formBackground {
+    z-index: 4;
     width: 700px;
     height: 500px;
     background-image: url("./formBackground.png");
@@ -107,3 +108,29 @@
     background: url(./x.svg);
     background-size: 50px 50px;
 }
+
+.loading {
+    z-index: 5;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 100px);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingSpinner {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid 15px rgba(255, 255, 255, 0.2);
+    border-top: solid 15px rgb(255, 255, 255);
+    animation: spinner 1.4s linear infinite;
+}
+
+@keyframes spinner {
+    0% { transform: rotate(-30deg); }
+    40% { transform: rotate(30deg); }
+    100% { transform: rotate(330deg); }
+  }

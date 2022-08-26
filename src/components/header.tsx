@@ -14,7 +14,6 @@ export const Header = (props: headerProps) => {
             <NavLink to="/index/socnet" className={props.cellStyles}>Соц сети</NavLink>
             <NavLink to="/index/message" className={props.cellStyles}>Мессенджеры</NavLink>
             <NavLink to="/index/calls" className={props.cellStyles}>Звонки</NavLink>
-            <NavLink to="/index/sites" className={props.cellStyles}>Сайты</NavLink>
             <NavLink to="/index/wifi" className={props.cellStyles}>Wi-Fi</NavLink>
         </div>
     )
