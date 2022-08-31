@@ -1,37 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import stateInterface from "../../misc/stateInterface";
+import axios from "axios";
+
+export const fetchEmail = createAsyncThunk('email/fetchEmail', async () => {
+    try {
+        console.log('hui');
+        const response = await axios.post('http://localhost:3030/getMail');
+        return response.data
+    } catch(error) {
+        console.log(error);        
+    }
+})
+
+interface authorizeMailProps {
+    email: string,
+    passwd: string
+}
+
+export const authorizeMail = createAsyncThunk('email/mailAuth', async ({email, passwd}: authorizeMailProps) => {
+    try {
+        console.log('hui');
+        const response = await axios.post('http://localhost:3030/mailAuth', {
+            login: email,
+            passwd: passwd
+        });
+    } catch(error) {
+        console.log(error);        
+    }
+})
 
 const initialState = {
-    isAnyEmailAuthed: true,
+    isAnyEmailAuthed: false,
     isAdditional: false,
-    eMails: [
-        {
-            sender: "chel1",
-            subject: "otchislenie1",
-            date: "29.01"
-        },
-        {
-            sender: "chel2",
-            subject: "otchislenie2",
-            date: "29.02"
-        },
-        {
-            sender: "chel3",
-            subject: "otchislenie3",
-            date: "29.03"
-        },
-        {
-            sender: "chel4",
-            subject: "otchislenie4",
-            date: "29.04"
-        },
-        {
-            sender: "chel5",
-            subject: "otchislenie5",
-            date: "29.05"
-        }
-    ],
+    emails: [],
     startingNumber: 1,
+    emailStatus: 'idle',
+    authStatus: 'idle'
 }
 
 export const emailsSlice = createSlice({
@@ -39,13 +43,38 @@ export const emailsSlice = createSlice({
     initialState,
     reducers: {
         setAuthed: state => {state.isAnyEmailAuthed = true},
+    },
+    extraReducers(builder) {
+        builder
+            .addCase(fetchEmail.pending, (state, action) => {
+                state.emailStatus = 'loading'
+            })
+            .addCase(fetchEmail.fulfilled, (state, action) => {
+                state.emailStatus = 'succeeded';
+                state.emails = action.payload.reverse()
+            })
+            .addCase(fetchEmail.rejected, (state, action) => {
+                state.emailStatus = 'rejected'
+            })
+            .addCase(authorizeMail.pending, (state, action) => {
+                state.authStatus = 'loading'
+            })
+            .addCase(authorizeMail.fulfilled, (state, action) => {
+                state.authStatus = 'succeeded';
+                state.isAnyEmailAuthed = true;
+            })
+            .addCase(authorizeMail.rejected, (state, action) => {
+                state.authStatus = 'rejected'
+            })
     }
 });
 
 export const selectStartingNumber = (state:stateInterface) =>  state.emails.startingNumber;
 export const selectIsEmailAuthed = (state:stateInterface) => state.emails.isAnyEmailAuthed;
-export const selectEMails = (state:stateInterface) => state.emails.eMails;
+export const selectEmails = (state:stateInterface) => state.emails.emails;
 export const selectIsAdditional = (state:stateInterface) => state.emails.isAdditional;
+export const selectEmailsStatus = (state:stateInterface) => state.emails.emailStatus;
+export const selectAuthStatus = (state:stateInterface) => state.emails.authStatus;
 
 export const { setAuthed } = emailsSlice.actions;
 export default emailsSlice.reducer;

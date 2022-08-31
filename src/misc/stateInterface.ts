@@ -8,7 +8,9 @@ export default interface stateInterface {
     emails: {
         isAnyEmailAuthed: boolean,
         isAdditional: boolean,
-        eMails: Mail[],
+        emails: Array<Mail>,
         startingNumber: number,
+        emailStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+        authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
     }
 }

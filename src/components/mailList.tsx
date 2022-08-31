@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
-import { selectEMails, selectStartingNumber } from '../features/emails/emailsSlice';
+
+import { selectEmails, selectEmailsStatus, fetchEmail } from '../features/emails/emailsSlice';
+import { AppDispatch } from '../app/store';
 
 interface MailListProps {
     mailStyle: string,
@@ -10,30 +11,35 @@ interface MailListProps {
 }
 
 export const MailList = ({ mailStyle, className }:MailListProps) => {
-    const dispatch = useDispatch()
-    const eMails = useSelector(selectEMails)
-    //const startingNumber = useSelector(selectStartingNumber)
+    const dispatch = useDispatch<AppDispatch>();
+    const emails = useSelector(selectEmails);
+    const emailStatus = useSelector(selectEmailsStatus);
 
-    // useEffect(() => {
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:3030/getMail',
-    //         data: {
-    //             number: startingNumber
-    //         }
-    //     }).then(resp =>{
-    //     })
-    // }, [])
+    useEffect(() => {
+        if (emailStatus === 'idle') {
+            dispatch(fetchEmail())
+        }
+    }, [emailStatus, dispatch])
+
+    console.log(emails)
 
     return (
         <div className={className}>
-            {eMails.map((mail) => (
-                <div className={mailStyle}>
-                    <div>{mail.sender}</div>
-                    <div>{mail.subject}</div>
-                    <div>{mail.date}</div>
-                </div>
-            ))}
+            {
+                emailStatus === 'succeeded' ? (
+                    emails.map((mail) => (
+                        <div className={mailStyle}>
+                            <div>{mail.sender}</div>
+                            <div>{mail.subject}</div>
+                            <div>{mail.date}</div>
+                        </div>
+                ))) 
+                : (
+                    <div className="loading">
+                        <div className="loadingSpinner"/>
+                    </div>
+                )
+            }
         </div>
     )
 }

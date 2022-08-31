@@ -20,10 +20,14 @@
 }
 
 .mail :first-child {
-    flex-grow: 3;
+    width: 30%;
 }
 
 .mail > * {
-    flex: 2 1 auto;
+    width: 40%;
 }
+
+.mail :last-child {
+    width: 200px;
+}   
 

@@ -6,3 +6,5 @@ export const store = configureStore({
         emails: emailsReducer,
     }
 }) 
+
+export type AppDispatch = typeof store.dispatch
