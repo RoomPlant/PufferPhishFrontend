@@ -2,3 +2,28 @@
     width: 100%;
     height: calc(100vh - 100px);
 }
+
+.mailList {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-top: 100px;
+}
+
+.mail {
+    display: flex;
+    border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 8px;
+}
+
+.mail :first-child {
+    flex-grow: 3;
+}
+
+.mail > * {
+    flex: 2 1 auto;
+}
+

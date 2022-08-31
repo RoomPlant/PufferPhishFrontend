@@ -133,4 +133,4 @@
     0% { transform: rotate(-30deg); }
     40% { transform: rotate(30deg); }
     100% { transform: rotate(330deg); }
-  }
+}

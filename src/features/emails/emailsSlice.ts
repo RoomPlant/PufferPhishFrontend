@@ -2,9 +2,35 @@ import { createSlice } from "@reduxjs/toolkit";
 import stateInterface from "../../misc/stateInterface";
 
 const initialState = {
-    isAnyEmailAuthed: false,
+    isAnyEmailAuthed: true,
     isAdditional: false,
-    eMails: [],
+    eMails: [
+        {
+            sender: "chel1",
+            subject: "otchislenie1",
+            date: "29.01"
+        },
+        {
+            sender: "chel2",
+            subject: "otchislenie2",
+            date: "29.02"
+        },
+        {
+            sender: "chel3",
+            subject: "otchislenie3",
+            date: "29.03"
+        },
+        {
+            sender: "chel4",
+            subject: "otchislenie4",
+            date: "29.04"
+        },
+        {
+            sender: "chel5",
+            subject: "otchislenie5",
+            date: "29.05"
+        }
+    ],
     startingNumber: 1,
 }
 
@@ -13,9 +39,6 @@ export const emailsSlice = createSlice({
     initialState,
     reducers: {
         setAuthed: state => {state.isAnyEmailAuthed = true},
-        fetchEmails: (state, action) => {
-            state.eMails = action.payload;
-        }
     }
 });
 
@@ -24,5 +47,5 @@ export const selectIsEmailAuthed = (state:stateInterface) => state.emails.isAnyE
 export const selectEMails = (state:stateInterface) => state.emails.eMails;
 export const selectIsAdditional = (state:stateInterface) => state.emails.isAdditional;
 
-export const { setAuthed, fetchEmails } = emailsSlice.actions;
+export const { setAuthed } = emailsSlice.actions;
 export default emailsSlice.reducer;

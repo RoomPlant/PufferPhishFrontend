@@ -25,7 +25,7 @@ export const EmailPage = () => {
         <div className="mailWrapper">
             {
                 isEmailAuthed ?
-                <MailList/>
+                <MailList className="mailList" mailStyle = "mail"/>
                 :
                 <AuthForm/>
             }
