@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./styles.css";
 import { Input } from "../input";
 import { AppDispatch } from "../../app/store";
-import { selectIsAdditional, setAuthed, selectAuthStatus, authorizeMail } from "../../features/emails/emailsSlice";
+import { selectIsAdditional, selectAuthStatus, authorizeMail } from "../../features/emails/emailsSlice";
 
 
 
@@ -33,7 +33,7 @@ export const AuthForm = () => {
                     <Input value={passwd} handleChange={setPasswd} type="password" labelStyle="label" inputStyle="input" label="Пароль"/>
                     <Button onClick={() => dispatch(authorizeMail({ email, passwd }))} className="button">Добавить</Button>
                 </div>
-                {isAdditional && <div onClick={() => dispatch(setAuthed())} className="closeIcon"/>}
+                {isAdditional && <div className="closeIcon"/>}
             </div>
         </div>
     )

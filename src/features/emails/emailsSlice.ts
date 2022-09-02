@@ -4,8 +4,16 @@ import axios from "axios";
 
 export const fetchEmail = createAsyncThunk('email/fetchEmail', async () => {
     try {
-        console.log('hui');
         const response = await axios.post('http://localhost:3030/getMail');
+        return response.data
+    } catch(error) {
+        console.log(error);        
+    }
+})
+
+export const checkAuth = createAsyncThunk('email/checkAuth', async () => {
+    try {
+        const response = await axios.post('http://localhost:3030/checkAuth');
         return response.data
     } catch(error) {
         console.log(error);        
@@ -19,7 +27,6 @@ interface authorizeMailProps {
 
 export const authorizeMail = createAsyncThunk('email/mailAuth', async ({email, passwd}: authorizeMailProps) => {
     try {
-        console.log('hui');
         const response = await axios.post('http://localhost:3030/mailAuth', {
             login: email,
             passwd: passwd
@@ -35,36 +42,50 @@ const initialState = {
     emails: [],
     startingNumber: 1,
     emailStatus: 'idle',
-    authStatus: 'idle'
+    authStatus: 'idle',
+    authCheckStatus: 'idle'
 }
 
 export const emailsSlice = createSlice({
     name: 'emails',
     initialState,
     reducers: {
-        setAuthed: state => {state.isAnyEmailAuthed = true},
+        
     },
     extraReducers(builder) {
         builder
             .addCase(fetchEmail.pending, (state, action) => {
-                state.emailStatus = 'loading'
+                state.emailStatus = 'loading';
             })
             .addCase(fetchEmail.fulfilled, (state, action) => {
                 state.emailStatus = 'succeeded';
                 state.emails = action.payload.reverse()
             })
             .addCase(fetchEmail.rejected, (state, action) => {
-                state.emailStatus = 'rejected'
+                state.emailStatus = 'rejected';
             })
             .addCase(authorizeMail.pending, (state, action) => {
-                state.authStatus = 'loading'
+                state.authStatus = 'loading';
             })
             .addCase(authorizeMail.fulfilled, (state, action) => {
                 state.authStatus = 'succeeded';
                 state.isAnyEmailAuthed = true;
             })
             .addCase(authorizeMail.rejected, (state, action) => {
-                state.authStatus = 'rejected'
+                state.authStatus = 'rejected';
+            })
+            .addCase(checkAuth.pending, (state, action) => {
+                state.authCheckStatus = 'loading';
+            })
+            .addCase(checkAuth.fulfilled, (state, action) => {
+                state.authCheckStatus = 'succeeded';
+                if (action.payload == "success") {
+                    state.isAnyEmailAuthed = true;
+                }
+                
+            })
+            .addCase(checkAuth.rejected, (state, action) => {
+                state.authCheckStatus = 'rejected';
             })
     }
 });
@@ -76,5 +97,4 @@ export const selectIsAdditional = (state:stateInterface) => state.emails.isAddit
 export const selectEmailsStatus = (state:stateInterface) => state.emails.emailStatus;
 export const selectAuthStatus = (state:stateInterface) => state.emails.authStatus;
 
-export const { setAuthed } = emailsSlice.actions;
 export default emailsSlice.reducer;

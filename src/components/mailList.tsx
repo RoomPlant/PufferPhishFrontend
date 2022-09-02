@@ -21,14 +21,13 @@ export const MailList = ({ mailStyle, className }:MailListProps) => {
         }
     }, [emailStatus, dispatch])
 
-    console.log(emails)
 
     return (
         <div className={className}>
             {
                 emailStatus === 'succeeded' ? (
                     emails.map((mail) => (
-                        <div className={mailStyle}>
+                        <div key={mail.uid} className={mailStyle}>
                             <div>{mail.sender}</div>
                             <div>{mail.subject}</div>
                             <div>{mail.date}</div>

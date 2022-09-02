@@ -1,7 +1,8 @@
 interface Mail {
     sender: string,
     subject: string,
-    date: string
+    date: string,
+    uid: number
 }
 
 export default interface stateInterface {
@@ -11,6 +12,7 @@ export default interface stateInterface {
         emails: Array<Mail>,
         startingNumber: number,
         emailStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-        authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
+        authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+        authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
     }
 }
