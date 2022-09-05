@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 
@@ -27,10 +27,15 @@ export const MailList = ({ mailStyle, className }:MailListProps) => {
             {
                 emailStatus === 'succeeded' ? (
                     emails.map((mail) => (
-                        <div key={mail.uid} className={mailStyle}>
-                            <div>{mail.sender}</div>
-                            <div>{mail.subject}</div>
-                            <div>{mail.date}</div>
+                        <div key={mail.uid}>
+                            <div className={mailStyle}>
+                                <div>{mail.sender}</div>
+                                <div>{mail.subject}</div>
+                                <div>{mail.date}</div>
+                            </div>
+                            <div>
+                                {mail.content}
+                            </div>
                         </div>
                 ))) 
                 : (
