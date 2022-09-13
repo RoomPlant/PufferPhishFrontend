@@ -11,9 +11,9 @@ export default interface stateInterface {
         isAnyEmailAuthed: boolean,
         isAdditional: boolean,
         emails: Array<Mail>,
-        startingNumber: number,
         emailStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
         authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-        authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
+        authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+        emailLoadingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
     }
 }
