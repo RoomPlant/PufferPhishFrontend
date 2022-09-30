@@ -6,17 +6,16 @@ import { useSelector } from 'react-redux';
 import { selectAuthStatus } from '../../features/emails/emailsSlice';
 
 export let MainPage = () => {
-    const authStatus = useSelector(selectAuthStatus);
-    return (
-        <div>
-            {(authStatus === 'loading')&&
-                <div className="loading">
-                    <div className="loadingSpinner"/>
-                </div>
-            }
-            <div className='mainBackgound'/>
-            <Header activeStyle="active" headerStyles="header" cellStyles="cell"/>
-            <div className='wrapper'><Outlet/></div>
-        </div>
-    );
+	const authStatus = useSelector(selectAuthStatus);
+	return (
+		<div>
+			{(authStatus === 'loading') &&
+				<div className="loading">
+					<div className="loadingSpinner" />
+				</div>
+			}
+			<Header activeStyle="active" headerStyles="header" cellStyles="cell" />
+			<div className='wrapper'><Outlet /></div>
+		</div>
+	);
 }

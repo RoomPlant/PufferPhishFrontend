@@ -1,55 +1,110 @@
 .mailWrapper {
-    width: 100%;
+	width: 100%;
 }
 
 .mailList {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 20%;
-    margin-top: 100px;
-    overflow: scroll;
-    overflow-x: hidden;
-    height: calc(100vh - 200px);
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 20%;
+	overflow: scroll;
+	overflow-x: hidden;
+	height: calc(100vh - 200px);
+	scrollbar-width: none;
+	-ms-overflow-style: none;
 }
 
 .mailList::-webkit-scrollbar {
-    display: none;
-  }
+	display: none;
+}
 
 .mail {
-    display: flex;
-    border-bottom: solid 2px rgba(0, 0, 0, 0.1);
-    justify-content: space-between;
-    font-size: 20px;
-    padding: 8px;
+	display: flex;
+	border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
+	font-size: 20px;
+	padding: 8px;
 }
 
 .mail :first-child {
-    width: 30%;
+	width: 30%;
 }
 
-.mail > * {
-    width: 40%;
+.mail>* {
+	width: 15%;
+}
+
+.mail .subject {
+	width: 30%;
 }
 
 .mail :last-child {
-    width: 200px;
-}   
+	width: 50px;
+}
 
 .mailLoading {
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 10px;
 }
 
 .mailLoading .loadingSpinner {
-    width: 50px;
-    height: 50px;
-    border: solid 7px rgba(180, 180, 180, 0.2);
-    border-top: solid 7px rgb(180, 180, 180);
+	width: 50px;
+	height: 50px;
+	border: solid 7px rgba(180, 180, 180, 0.2);
+	border-top: solid 7px rgb(180, 180, 180);
+}
+
+.passed {
+	background-image: url('./check-free-icon-font.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 30px;
+}
+
+.notPassed {
+	background-image: url('./cross-free-icon-font.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 30px;
+}
+
+.mailContent {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+.mailHeader {
+	width: 70%;
+	display: flex;
+	height: 100px;
+	margin-left: 20%;
+	align-items: center;
+}
+
+.refreshButton {
+	display: flex;
+	margin-left: auto;
+	width: 40px;
+	height: 40px;
+	background-image: url("./icons8-refresh.svg");
+	box-sizing: border-box;
+	border-radius: 10px;
+	border: solid 3px rgba(0, 0, 0, 0.1);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.refreshButton:hover {
+	background-color: rgba(0, 0, 0, 0.01);
+}
+
+.beingRefreshed {
+	background-color: rgba(0, 0, 0, 0.04);
+}
+
+.beingRefreshed:hover {
+	background-color: rgba(0, 0, 0, 0.04);
 }

@@ -1,95 +1,85 @@
 .header {
-    padding-top: 15px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-around;
-    background: linear-gradient(to left, #b44a88, #7249b3);
-    height: 100px;
-    z-index: 2;
-    width: 100%;
-    position: fixed;
+	padding-top: 15px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-around;
+	background: linear-gradient(to left, #b44a88, #7249b3);
+	height: 100px;
+	z-index: 2;
+	width: 100%;
 }
 
 .disabled {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;600;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
 
 .cell {
-    transition-duration: 150ms;
-    color: white;
-    font-size: 28px;
-    font-family: 'Raleway' sans-serif;
-    text-align: center;
-    width: calc(85%/5);
-    word-wrap: normal;
-    border-radius: 15px 15px 0px 0px;
-    padding: 20px 0px;
-    box-sizing: border-box;
-    text-decoration: none;
+	transition-duration: 150ms;
+	color: white;
+	font-size: 28px;
+	font-family: 'Raleway' sans-serif;
+	text-align: center;
+	width: calc(85%/5);
+	word-wrap: normal;
+	border-radius: 15px 15px 0px 0px;
+	padding: 20px 0px;
+	box-sizing: border-box;
+	text-decoration: none;
 }
 
 .cell:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 .active {
-    transition-duration: 150ms;
-    background-color: #ededed;
-    color: #994a99;
-    box-shadow: 0px -5px 5px #50265077;
+	transition-duration: 150ms;
+	background-color: #ededed;
+	color: #994a99;
+	box-shadow: 0px -5px 5px #50265077;
 }
 
 .active:hover {
-    background-color: #ededed;
-}
-
-.mainBackgound {
-    width: 100%;
-    height: calc(100vh - 100px);
-    position: fixed;
-    z-index: 0;
-    background-image: url("./background.png");
-    background-position: center;
-    margin-top: 100px;
+	background-color: #ededed;
 }
 
 .wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 1;
-    position: relative;
-    padding-top: 100px;
+	width: 100%;
+	background-image: url("./background.png");
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	z-index: 1;
+	position: relative;
 }
 
 .button {
-    transition-duration: 150ms;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    width: min-content;
-    padding: 10px 45px;
-    border: none;
-    box-sizing: border-box;
-    border-radius: 5px;    
-    background: linear-gradient(to left, #a152b4, #b454ae); 
-    align-self: center;
-    justify-self: center;
-    cursor: pointer;
+	transition-duration: 150ms;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	display: flex;
+	width: min-content;
+	padding: 10px 45px;
+	border: none;
+	box-sizing: border-box;
+	border-radius: 5px;
+	background: linear-gradient(to left, #a152b4, #b454ae);
+	align-self: center;
+	justify-self: center;
+	cursor: pointer;
 }
 
 .button:hover {
-    background: linear-gradient(to left, #8f4aa0, #9e4a98);
+	background: linear-gradient(to left, #8f4aa0, #9e4a98);
 }
 
 .button:active {
-    background: linear-gradient(to left, #aa58be, #be5ab8);
+	background: linear-gradient(to left, #aa58be, #be5ab8);
 }
 
 .button:focus-visible {
-    outline: none;
-    background-color: rgba(170, 96, 171, 0.9);
+	outline: none;
+	background-color: rgba(170, 96, 171, 0.9);
 }
