@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 
-import { selectEmails, selectEmailsStatus, fetchEmail, selectEmailLoadingStatus, loadMails } from '../features/emails/emailsSlice';
+import { selectEmails, selectEmailsStatus, fetchEmail, selectEmailLoadingStatus, loadMails, selectIndex } from '../features/emails/emailsSlice';
 import { AppDispatch } from '../app/store';
 
 interface MailListProps {
@@ -13,6 +13,7 @@ interface MailListProps {
 export const MailList = ({ mailStyle, className }: MailListProps) => {
 	const [mailOpener, setMailOpener] = useState<any>({});
 	const dispatch = useDispatch<AppDispatch>();
+	const index = useSelector(selectIndex);
 	const emails = useSelector(selectEmails);
 	const emailStatus = useSelector(selectEmailsStatus);
 	const emailLoadingStatus = useSelector(selectEmailLoadingStatus);
@@ -22,7 +23,7 @@ export const MailList = ({ mailStyle, className }: MailListProps) => {
 
 	useEffect(() => {
 		if (emailStatus === 'idle') {
-			dispatch(fetchEmail())
+			dispatch(fetchEmail(index))
 			emails.map(mail => {
 				tempMailObj = {
 					...tempMailObj,
@@ -38,7 +39,7 @@ export const MailList = ({ mailStyle, className }: MailListProps) => {
 			const { scrollTop, scrollHeight, clientHeight } = mailListRef.current;
 			if ((scrollTop + clientHeight === scrollHeight) &&
 				(emailLoadingStatus === "idle")) {
-				dispatch(loadMails());
+				dispatch(loadMails(index));
 			}
 		}
 	};
@@ -63,7 +64,6 @@ export const MailList = ({ mailStyle, className }: MailListProps) => {
 									<div className='subject'>{mail.subject}</div>
 									<div>{mail.date}</div>
 									<div className={mail.isPassed ? 'passed' : 'notPassed'} />
-									<div>{mail.uid}</div>
 								</div>
 								{mailOpener[String(mail.uid)] && <div className='mailContent'>
 									{mail.content}

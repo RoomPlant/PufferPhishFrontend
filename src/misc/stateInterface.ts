@@ -7,15 +7,23 @@ interface Mail {
 	isPassed: boolean
 }
 
+interface mailAddress {
+	emails: Array<Mail>,
+	address: string
+}
+
+export interface emails {
+	isAnyEmailAuthed: boolean,
+	isAdditional: boolean,
+	addressList: mailAddress[],
+	index: number,
+	emailStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+	authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+	authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+	emailLoadingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+	emailRefreshingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
+}
+
 export default interface stateInterface {
-	emails: {
-		isAnyEmailAuthed: boolean,
-		isAdditional: boolean,
-		emails: Array<Mail>,
-		emailStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-		authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-		authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-		emailLoadingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-		emailRefreshingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-	}
+	emails: emails
 }
