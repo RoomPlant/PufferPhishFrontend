@@ -109,11 +109,10 @@ export const emailsSlice = createSlice({
 			.addCase(deleteMailBox.fulfilled, (state, action) => {
 				if (action.payload.result === "success") {
 					state.deleteMailBoxStatus = 'succeeded';
-					if (state.index === action.payload.index) {
-						state.index = 0
-					}
 					if (state.addressList.length === 1) {
 						state.isAnyEmailAuthed = false;
+					} else if (state.index === action.payload.index) {
+						state.index = 0
 					}
 					state.addressList.splice(action.payload.index, 1);
 				} else {
@@ -201,6 +200,14 @@ export const selectEmailRefreshingStatus = (state: stateInterface) => state.emai
 export const selectAuthStatus = (state: stateInterface) => state.emails.authStatus;
 export const selectIndex = (state: stateInterface) => state.emails.index;
 export const selectAddressList = (state: stateInterface) => state.emails.addressList;
+export const selectAllStatuses = (state: stateInterface) => [
+	state.emails.emailStatus,
+	state.emails.authStatus,
+	state.emails.authCheckStatus,
+	state.emails.emailLoadingStatus,
+	state.emails.emailRefreshingStatus,
+	state.emails.deleteMailBoxStatus
+]
 
 export const { changeIndex, hadleMailAddressAddition } = emailsSlice.actions
 
