@@ -9,7 +9,8 @@ interface Mail {
 
 interface mailAddress {
 	emails: Array<Mail>,
-	address: string
+	address: string,
+	index: number,
 }
 
 export interface emails {
@@ -21,7 +22,8 @@ export interface emails {
 	authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
 	authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
 	emailLoadingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
-	emailRefreshingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
+	emailRefreshingStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
+	deleteMailBoxStatus: 'idle' | 'succeeded' | 'loading' | 'rejected'
 }
 
 export default interface stateInterface {

@@ -7,17 +7,17 @@ import { WIP } from "../pages/WIP/WIP"
 
 export let Router = () => {
 
-    return (
-        <Routes>
-            {/* <Route path="/login" element={<LoginPage setIsLoggedIn={props.setIsLoggedIn} isLoggedIn={props.isLoggedIn}/>}/> */}
-            <Route path="/" element={<StartPage/>}/>
-            <Route path="/index" element={<MainPage/>}>
-                <Route path="/index/email" element={<EmailPage/>}/>
-                <Route path="/index/socnet" element={<WIP/>}/>
-                <Route path="/index/message" element={<WIP/>}/>
-                <Route path="/index/calls" element={<WIP/>}/>
-                <Route path="/index/wifi" element={<WIP/>}/>
-            </Route>
-        </Routes>
-        )
+	return (
+		<Routes>
+			{/* <Route path="/login" element={<LoginPage setIsLoggedIn={props.setIsLoggedIn} isLoggedIn={props.isLoggedIn}/>}/> */}
+			<Route path="/" element={<StartPage />} />
+			<Route path="/index" element={<MainPage />}>
+				<Route path="/index/email" element={<EmailPage />} />
+				<Route path="/index/socNet" element={<WIP />} />
+				<Route path="/index/messanger" element={<WIP />} />
+				<Route path="/index/calls" element={<WIP />} />
+				<Route path="/index/wifi" element={<WIP />} />
+			</Route>
+		</Routes>
+	)
 }

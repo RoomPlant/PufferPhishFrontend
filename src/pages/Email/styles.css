@@ -82,11 +82,13 @@
 	height: 100px;
 	margin-left: 20%;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .refreshButton {
 	display: flex;
 	margin-left: auto;
+	transition-duration: 150ms;
 	width: 40px;
 	height: 40px;
 	background-image: url("./icons8-refresh.svg");
@@ -98,7 +100,7 @@
 }
 
 .refreshButton:hover {
-	background-color: rgba(0, 0, 0, 0.01);
+	background-color: rgba(0, 0, 0, 0.02);
 }
 
 .beingRefreshed {
@@ -107,4 +109,53 @@
 
 .beingRefreshed:hover {
 	background-color: rgba(0, 0, 0, 0.04);
+}
+
+.addButton {
+	display: flex;
+	margin-left: auto;
+	width: 40px;
+	height: 40px;
+	background-image: url("./Group\ 14.svg");
+	box-sizing: border-box;
+	border-radius: 10px;
+	transition-duration: 150ms;
+	border: solid 3px rgba(0, 0, 0, 0.1);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.addButton:hover {
+	background-color: rgba(0, 0, 0, 0.02);
+}
+
+.mailAddresses {
+	display: flex;
+	align-items: center;
+}
+
+.address {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+	font-size: 20px;
+	font-family: 'Raleway' sans-serif;
+	box-sizing: border-box;
+	background-color: rgba(0, 0, 0, 0.05);
+	padding: 5px 15px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.delete {
+	width: 25px;
+	height: 25px;
+	color: #b7b7b7;
+	margin-left: 10px;
+	transition-duration: 150ms;
+	border-radius: 25px;
+}
+
+.delete:hover {
+	background-color: #EFEFEF;
 }

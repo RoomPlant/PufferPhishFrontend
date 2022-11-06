@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 
-import { selectEmails, selectEmailsStatus, fetchEmail, selectEmailLoadingStatus, loadMails, selectIndex } from '../features/emails/emailsSlice';
+import { selectEmails, selectEmailsStatus, fetchEmail, selectEmailLoadingStatus, loadMails, selectIndex, selectAddressList } from '../features/emails/emailsSlice';
 import { AppDispatch } from '../app/store';
 
 interface MailListProps {
@@ -13,6 +13,7 @@ interface MailListProps {
 export const MailList = ({ mailStyle, className }: MailListProps) => {
 	const [mailOpener, setMailOpener] = useState<any>({});
 	const dispatch = useDispatch<AppDispatch>();
+	const addressList = useSelector(selectAddressList);
 	const index = useSelector(selectIndex);
 	const emails = useSelector(selectEmails);
 	const emailStatus = useSelector(selectEmailsStatus);
@@ -32,7 +33,7 @@ export const MailList = ({ mailStyle, className }: MailListProps) => {
 			})
 			setMailOpener(tempMailObj)
 		}
-	}, [emailStatus, dispatch])
+	}, [addressList, emailStatus, dispatch])
 
 	const handleScroll = () => {
 		if (mailListRef.current) {

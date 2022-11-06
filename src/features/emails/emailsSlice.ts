@@ -44,6 +44,18 @@ export const refreshMails = createAsyncThunk('email/refreshMails', async (index:
 	}
 })
 
+export const deleteMailBox = createAsyncThunk('email/deleteMailBox', async (index: number) => {
+	console.log('hui')
+	try {
+		const response = await axios.post('http://localhost:3030/deleteMailBox', {
+			index: index
+		})
+		return response.data
+	} catch (error) {
+		console.log(error)
+	}
+})
+
 interface authorizeMailProps {
 	email: string,
 	passwd: string
@@ -75,6 +87,7 @@ const initialState: emails = {
 	authCheckStatus: 'idle',
 	emailLoadingStatus: 'idle',
 	emailRefreshingStatus: 'idle',
+	deleteMailBoxStatus: 'idle',
 }
 
 export const emailsSlice = createSlice({
@@ -83,10 +96,33 @@ export const emailsSlice = createSlice({
 	reducers: {
 		changeIndex(state, action: PayloadAction<number>) {
 			state.index = action.payload
+		},
+		hadleMailAddressAddition(state) {
+			state.isAdditional = !state.isAdditional;
 		}
 	},
 	extraReducers(builder) {
 		builder
+			.addCase(deleteMailBox.pending, (state, action) => {
+				state.deleteMailBoxStatus = 'loading';
+			})
+			.addCase(deleteMailBox.fulfilled, (state, action) => {
+				if (action.payload.result === "success") {
+					state.deleteMailBoxStatus = 'succeeded';
+					if (state.index === action.payload.index) {
+						state.index = 0
+					}
+					if (state.addressList.length === 1) {
+						state.isAnyEmailAuthed = false;
+					}
+					state.addressList.splice(action.payload.index, 1);
+				} else {
+					state.deleteMailBoxStatus = 'rejected';
+				}
+			})
+			.addCase(deleteMailBox.rejected, (state, action) => {
+				state.deleteMailBoxStatus = 'rejected';
+			})
 			.addCase(fetchEmail.pending, (state, action) => {
 				state.emailStatus = 'loading';
 			})
@@ -126,11 +162,14 @@ export const emailsSlice = createSlice({
 			})
 			.addCase(authorizeMail.fulfilled, (state, action) => {
 				state.authStatus = 'succeeded';
-				state.index = action.payload.index
+				state.isAdditional = false;
 				state.addressList.push({
 					emails: [],
-					address: action.payload.address
-				})
+					address: action.payload.address,
+					index: action.payload.index,
+				});
+				state.index = action.payload.index;
+				state.emailStatus = 'idle';
 				state.isAnyEmailAuthed = true;
 			})
 			.addCase(authorizeMail.rejected, (state, action) => {
@@ -141,7 +180,8 @@ export const emailsSlice = createSlice({
 			})
 			.addCase(checkAuth.fulfilled, (state, action) => {
 				state.authCheckStatus = 'succeeded';
-				if (action.payload == "success") {
+				state.addressList = action.payload
+				if (state.addressList.length > 0) {
 					state.isAnyEmailAuthed = true;
 				}
 
@@ -160,5 +200,8 @@ export const selectEmailLoadingStatus = (state: stateInterface) => state.emails.
 export const selectEmailRefreshingStatus = (state: stateInterface) => state.emails.emailRefreshingStatus;
 export const selectAuthStatus = (state: stateInterface) => state.emails.authStatus;
 export const selectIndex = (state: stateInterface) => state.emails.index;
+export const selectAddressList = (state: stateInterface) => state.emails.addressList;
+
+export const { changeIndex, hadleMailAddressAddition } = emailsSlice.actions
 
 export default emailsSlice.reducer;

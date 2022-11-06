@@ -47,6 +47,7 @@
 
 .wrapper {
 	width: 100%;
+	height: calc(100vh - 100px);
 	background-image: url("./background.png");
 	background-position: center;
 	display: flex;
