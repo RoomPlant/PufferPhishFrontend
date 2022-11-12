@@ -200,6 +200,7 @@ export const selectEmailRefreshingStatus = (state: stateInterface) => state.emai
 export const selectAuthStatus = (state: stateInterface) => state.emails.authStatus;
 export const selectIndex = (state: stateInterface) => state.emails.index;
 export const selectAddressList = (state: stateInterface) => state.emails.addressList;
+export const selectAuthCheckStatus = (state: stateInterface) => state.emails.authCheckStatus
 export const selectAllStatuses = (state: stateInterface) => [
 	state.emails.emailStatus,
 	state.emails.authStatus,

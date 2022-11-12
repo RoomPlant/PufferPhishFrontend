@@ -3,13 +3,14 @@ import './styles.css'
 import { Header } from '../../components/header'
 import { Outlet } from 'react-router';
 import { useSelector } from 'react-redux';
-import { selectAuthStatus } from '../../features/emails/emailsSlice';
+import { selectAuthCheckStatus, selectAuthStatus } from '../../features/emails/emailsSlice';
 
 export let MainPage = () => {
 	const authStatus = useSelector(selectAuthStatus);
+	const authCheckStatus = useSelector(selectAuthCheckStatus);
 	return (
 		<div>
-			{(authStatus === 'loading') &&
+			{(authStatus === 'loading' || authCheckStatus === 'loading') &&
 				<div className="loading">
 					<div className="loadingSpinner" />
 				</div>
