@@ -3,7 +3,7 @@ import { changeIndex, deleteMailBox, hadleMailAddressAddition, refreshMails, sel
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { useSelector } from "react-redux";
-import crossIcon from "./Form/x.svg"
+import crossIcon from "../styles/media/x.svg"
 
 export const MailHeader = () => {
 	const index = useSelector(selectIndex);

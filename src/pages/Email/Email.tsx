@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AuthForm } from "../../components/Form/Form";
+import { AuthForm } from "../../components/Form";
 import { checkAuth, selectAuthCheckStatus, selectIsAdditional, selectIsEmailAuthed } from "../../features/emails/emailsSlice";
 import { MailList } from "../../components/mailList"
-import "./styles.css"
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../app/store";
 import { MailHeader } from "../../components/mailHeader";

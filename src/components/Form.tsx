@@ -3,10 +3,9 @@ import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from "react-redux";
 
-import "./styles.css";
-import { Input } from "../input";
-import { AppDispatch } from "../../app/store";
-import { selectIsAdditional, authorizeMail, hadleMailAddressAddition, selectAuthStatus } from "../../features/emails/emailsSlice";
+import { Input } from "./input";
+import { AppDispatch } from "../app/store";
+import { selectIsAdditional, authorizeMail, hadleMailAddressAddition, selectAuthStatus } from "../features/emails/emailsSlice";
 
 
 
