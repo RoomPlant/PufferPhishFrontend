@@ -45,7 +45,6 @@ export const refreshMails = createAsyncThunk('email/refreshMails', async (index:
 })
 
 export const deleteMailBox = createAsyncThunk('email/deleteMailBox', async (index: number) => {
-	console.log('hui')
 	try {
 		const response = await axios.post('http://localhost:3030/deleteMailBox', {
 			index: index
