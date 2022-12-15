@@ -18,6 +18,7 @@ export interface emails {
 	isAdditional: boolean,
 	addressList: mailAddress[],
 	index: number,
+	keyStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
 	emailStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
 	authStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',
 	authCheckStatus: 'idle' | 'succeeded' | 'loading' | 'rejected',

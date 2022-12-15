@@ -22,7 +22,7 @@ export const MailHeader = () => {
 			<div className="mailAddresses">
 				{
 					addressList.map((address, index) => (
-						<div className="address" onClick={() => { dispatch(changeIndex(index)) }}>
+						<div key={address.address} className="address" onClick={() => { dispatch(changeIndex(index)) }}>
 							{address.address}
 							<img onClick={() => {
 								if (allStatuses.every((status => status !== "loading"))) {

@@ -15,7 +15,9 @@ export const EmailPage = () => {
 	const authCheckStatus = useSelector(selectAuthCheckStatus)
 
 	useEffect(() => {
-		dispatch(checkAuth());
+		if (authCheckStatus !== 'succeeded') {
+			dispatch(checkAuth());
+		}
 	}, [])
 	return (
 		<div className="mailWrapper">

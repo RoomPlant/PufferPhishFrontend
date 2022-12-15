@@ -33,6 +33,17 @@ export const loadMails = createAsyncThunk('email/loadMails', async (index: numbe
 	}
 })
 
+export const submitKey = createAsyncThunk('email/key', async (key: string) => {
+	try {
+		const response = await axios.post('http://localhost:3030/key', {
+			key: key
+		});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+})
+
 export const refreshMails = createAsyncThunk('email/refreshMails', async (index: number) => {
 	try {
 		const response = await axios.post('http://localhost:3030/refreshMails', {
@@ -81,6 +92,7 @@ const initialState: emails = {
 	isAdditional: false,
 	addressList: [],
 	index: 0,
+	keyStatus: 'idle',
 	emailStatus: 'idle',
 	authStatus: 'idle',
 	authCheckStatus: 'idle',
@@ -102,6 +114,15 @@ export const emailsSlice = createSlice({
 	},
 	extraReducers(builder) {
 		builder
+			.addCase(submitKey.pending, (state, action) => {
+				state.keyStatus = 'loading';
+			})
+			.addCase(submitKey.fulfilled, (state, action) => {
+				state.keyStatus = action.payload.result === "success" ? 'succeeded' : 'idle';
+			})
+			.addCase(submitKey.rejected, (state, action) => {
+				state.keyStatus = 'idle';
+			})
 			.addCase(deleteMailBox.pending, (state, action) => {
 				state.deleteMailBoxStatus = 'loading';
 			})
@@ -178,9 +199,10 @@ export const emailsSlice = createSlice({
 			})
 			.addCase(checkAuth.fulfilled, (state, action) => {
 				state.authCheckStatus = 'succeeded';
-				state.addressList = action.payload
-				if (state.addressList.length > 0) {
-					state.isAnyEmailAuthed = true;
+				const response = action.payload
+				if (response) {
+					state.addressList = response;
+					state.isAnyEmailAuthed = Boolean(response.length);
 				}
 
 			})
@@ -198,6 +220,7 @@ export const selectEmailLoadingStatus = (state: stateInterface) => state.emails.
 export const selectEmailRefreshingStatus = (state: stateInterface) => state.emails.emailRefreshingStatus;
 export const selectAuthStatus = (state: stateInterface) => state.emails.authStatus;
 export const selectIndex = (state: stateInterface) => state.emails.index;
+export const selectKeyStatus = (state: stateInterface) => state.emails.keyStatus;
 export const selectAddressList = (state: stateInterface) => state.emails.addressList;
 export const selectAuthCheckStatus = (state: stateInterface) => state.emails.authCheckStatus
 export const selectAllStatuses = (state: stateInterface) => [

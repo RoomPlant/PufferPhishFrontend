@@ -396,3 +396,34 @@ code {
 .delete:hover {
 	background-color: #EFEFEF;
 }
+
+.keyFormWrapper {
+	width: 100%;
+	height: calc(100vh - 100px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.keyForm {
+	width: 400px;
+	height: 280px;
+	box-sizing: border-box;
+	border-radius: 25px;
+	background-color: #B8AEDB;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	padding-left: 25px;
+	padding-right: 15px;
+}
+
+.formText {
+	font-size: 28px;
+	font-weight: 200;
+	margin-bottom: 0;
+	color: #ffffff;
+	display: flex;
+	font-family: 'Raleway', sans-serif;
+	border-bottom: solid rgba(255, 255, 255, 0.2);
+}
